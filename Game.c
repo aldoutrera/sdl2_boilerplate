@@ -1,24 +1,24 @@
 #include "Game.h"
 
 bool game_init(const char* title, int x_position, int y_position, int width, int height, int flags) {
-  if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
-    window = SDL_CreateWindow(title, x_position, y_position, width, height, flags);
-    if (window != 0) {
-      renderer = SDL_CreateRenderer(window, -1, 0);
-      if (renderer != 0) {
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  } else {
+  if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
     return false;
   }
 
-  game_running = true;
+  window = SDL_CreateWindow(title, x_position, y_position, width, height, flags);
 
+  if (window == 0) {
+    return false;
+  }
+
+  renderer = SDL_CreateRenderer(window, -1, 0);
+
+  if (renderer == 0) {
+    return false;
+  }
+
+  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+  game_running = true;
   return true;
 }
 
