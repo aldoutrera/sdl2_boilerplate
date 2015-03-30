@@ -1,6 +1,6 @@
 #include "Game.h"
 
-int main(int argc, char* argv[]){
+int main(int argc, char* argv[]) {
   game_init("Title", 100, 100, 640, 480, 0);
 
   while(is_game_running()) {
