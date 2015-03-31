@@ -6,9 +6,13 @@
 SDL_Window* window;
 SDL_Renderer* renderer;
 
+SDL_Texture* texture;
+SDL_Rect sourceRectangle;
+SDL_Rect destinationRectangle;
+
 bool game_running;
 
-bool game_init(const char* title, int x_position, int y_position, int width, int height, int flags);
+bool game_init(const char* title, int x_position, int y_position, int width, int height, bool fullscreen);
 
 void game_render();
 
