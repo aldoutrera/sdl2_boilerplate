@@ -1,6 +1,23 @@
 #include "Game.h"
 
-bool game_init(const char* title, int x_position, int y_position, int width, int height, int flags) {
+bool game_init(const char* title, int x_position, int y_position, int width, int height, bool fullscreen) {
+
+  SDL_Surface* tempSurface = SDL_LoadBMP("char5.bmp");
+  texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
+  SDL_FreeSurface(tempSurface);
+  SDL_QueryTexture(texture, NULL, NULL, &sourceRectangle.w, &sourceRectangle.h);
+
+  destinationRectangle.x = sourceRectangle.x = 0;
+  destinationRectangle.y = sourceRectangle.y = 0;
+  destinationRectangle.w = sourceRectangle.w;
+  destinationRectangle.h = sourceRectangle.h;
+
+  int flags = 0;
+
+  if (fullscreen) {
+    flags = SDL_WINDOW_FULLSCREEN;
+  }
+
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
     return false;
   }
@@ -24,6 +41,7 @@ bool game_init(const char* title, int x_position, int y_position, int width, int
 
 void game_render() {
   SDL_RenderClear(renderer);
+  SDL_RenderCopy(renderer, texture, &sourceRectangle, &destinationRectangle);
   SDL_RenderPresent(renderer);
 }
 
