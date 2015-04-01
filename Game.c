@@ -26,8 +26,9 @@ bool game_init(const char* title, int x_position, int y_position, int width, int
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
   game_running = true;
 
-  tempSurface = SDL_LoadBMP("char5.bmp");
+  SDL_Surface* tempSurface = SDL_LoadBMP("char5.bmp");
   texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
+  SDL_FreeSurface(tempSurface);
   SDL_QueryTexture(texture, NULL, NULL, &sourceRectangle.w, &sourceRectangle.h);
 
   destinationRectangle.x = sourceRectangle.x = 0;
@@ -62,8 +63,6 @@ void game_handle_events() {
 
 void game_clean() {
   SDL_DestroyTexture(texture);
-  SDL_FreeSurface(tempSurface);
-
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
   SDL_Quit();
