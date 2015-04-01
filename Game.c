@@ -33,8 +33,8 @@ bool game_init(const char* title, int x_position, int y_position, int width, int
 
   destinationRectangle.x = sourceRectangle.x = 0;
   destinationRectangle.y = sourceRectangle.y = 0;
-  destinationRectangle.w = sourceRectangle.w;
-  destinationRectangle.h = sourceRectangle.h;
+  destinationRectangle.w = sourceRectangle.w = 60;
+  destinationRectangle.h = sourceRectangle.h = 160;
 
   return true;
 }
@@ -46,6 +46,7 @@ void game_render() {
 }
 
 void game_update() {
+  sourceRectangle.x = 320 * ((SDL_GetTicks() / 100) % 6);
 }
 
 void game_handle_events() {
