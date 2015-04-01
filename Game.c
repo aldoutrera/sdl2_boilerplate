@@ -1,17 +1,6 @@
 #include "Game.h"
 
 bool game_init(const char* title, int x_position, int y_position, int width, int height, bool fullscreen) {
-
-  SDL_Surface* tempSurface = SDL_LoadBMP("char5.bmp");
-  texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
-  SDL_FreeSurface(tempSurface);
-  SDL_QueryTexture(texture, NULL, NULL, &sourceRectangle.w, &sourceRectangle.h);
-
-  destinationRectangle.x = sourceRectangle.x = 0;
-  destinationRectangle.y = sourceRectangle.y = 0;
-  destinationRectangle.w = sourceRectangle.w;
-  destinationRectangle.h = sourceRectangle.h;
-
   int flags = 0;
 
   if (fullscreen) {
@@ -36,6 +25,16 @@ bool game_init(const char* title, int x_position, int y_position, int width, int
 
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
   game_running = true;
+
+  tempSurface = SDL_LoadBMP("char5.bmp");
+  texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
+  SDL_QueryTexture(texture, NULL, NULL, &sourceRectangle.w, &sourceRectangle.h);
+
+  destinationRectangle.x = sourceRectangle.x = 0;
+  destinationRectangle.y = sourceRectangle.y = 0;
+  destinationRectangle.w = sourceRectangle.w;
+  destinationRectangle.h = sourceRectangle.h;
+
   return true;
 }
 
@@ -62,6 +61,9 @@ void game_handle_events() {
 }
 
 void game_clean() {
+  SDL_DestroyTexture(texture);
+  SDL_FreeSurface(tempSurface);
+
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
   SDL_Quit();
