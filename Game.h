@@ -6,7 +6,6 @@
 SDL_Window* window;
 SDL_Renderer* renderer;
 
-SDL_Surface* tempSurface;
 SDL_Texture* texture;
 SDL_Rect sourceRectangle;
 SDL_Rect destinationRectangle;
