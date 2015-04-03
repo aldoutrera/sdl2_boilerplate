@@ -31,10 +31,15 @@ bool game_init(const char* title, int x_position, int y_position, int width, int
   SDL_FreeSurface(tempSurface);
   SDL_QueryTexture(texture, NULL, NULL, &sourceRectangle.w, &sourceRectangle.h);
 
-  destinationRectangle.x = sourceRectangle.x = 0;
-  destinationRectangle.y = sourceRectangle.y = 0;
-  destinationRectangle.w = sourceRectangle.w = 60;
-  destinationRectangle.h = sourceRectangle.h = 160;
+  destinationRectangle.x = 0;
+  destinationRectangle.y = 0;
+  destinationRectangle.w = 45;
+  destinationRectangle.h = 65;
+
+  sourceRectangle.x = 0;
+  sourceRectangle.y = 70;
+  sourceRectangle.w = 45;
+  sourceRectangle.h = 65;
 
   return true;
 }
@@ -46,7 +51,8 @@ void game_render() {
 }
 
 void game_update() {
-  sourceRectangle.x = 320 * ((SDL_GetTicks() / 100) % 6);
+  sourceRectangle.x = 135 * ((SDL_GetTicks() / 1000) % 4);
+  // sourceRectangle.x = SDL_GetTicks() / 100;
 }
 
 void game_handle_events() {
