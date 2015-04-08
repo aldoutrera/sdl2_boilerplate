@@ -23,10 +23,10 @@ bool game_init(const char* title, int x_position, int y_position, int width, int
     return false;
   }
 
-  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+  SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
   game_running = true;
 
-  SDL_Surface* tempSurface = SDL_LoadBMP("char5.bmp");
+  SDL_Surface* tempSurface = IMG_Load("char5.png");
   texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
   SDL_FreeSurface(tempSurface);
   SDL_QueryTexture(texture, NULL, NULL, &sourceRectangle.w, &sourceRectangle.h);
@@ -46,7 +46,7 @@ bool game_init(const char* title, int x_position, int y_position, int width, int
 
 void game_render() {
   SDL_RenderClear(renderer);
-  SDL_RenderCopy(renderer, texture, &sourceRectangle, &destinationRectangle);
+  SDL_RenderCopyEx(renderer, texture, &sourceRectangle, &destinationRectangle, 0, 0, SDL_FLIP_HORIZONTAL);
   SDL_RenderPresent(renderer);
 }
 
